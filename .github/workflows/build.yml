@@ -1,0 +1,100 @@
+name: Build and Publish Platform Packages
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-platforms:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            platform: linux-x64
+            container: ''
+          - os: ubuntu-latest
+            platform: linuxmusl-x64
+            container: alpine:latest
+          - os: macos-15-intel
+            platform: darwin-x64
+            container: ''
+          - os: macos-15
+            platform: darwin-arm64
+            container: ''
+          - os: windows-latest
+            platform: win32-x64
+            container: ''
+    
+    runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container || '' }}
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        if: matrix.container == ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://npm.pkg.github.com'
+      
+      - name: Setup Node.js (Alpine)
+        if: matrix.container != ''
+        run: |
+          apk add --no-cache nodejs npm
+          npm config set registry https://npm.pkg.github.com
+      
+      - name: Install dependencies (Ubuntu/macOS/Windows)
+        if: matrix.container == ''
+        run: npm ci
+      
+      - name: Install dependencies (Alpine)
+        if: matrix.container != ''
+        run: |
+          apk add --no-cache cmake make g++ python3
+          npm ci
+      
+      - name: Build native addon
+        run: npm run rebuild
+      
+      - name: Create platform package
+        run: |
+          mkdir -p pkg
+          cat > pkg/package.json <<EOF
+          {
+            "name": "@cc-emu/net-${{ matrix.platform }}",
+            "version": "${{ github.ref_name }}",
+            "os": ["${{ matrix.platform == 'win32-x64' && 'win32' || matrix.platform == 'darwin-x64' && 'darwin' || matrix.platform == 'darwin-arm64' && 'darwin' || 'linux' }}"],
+            "cpu": ["${{ matrix.platform == 'darwin-arm64' && 'arm64' || 'x64' }}"],
+            "files": ["ccemu-net.node"],
+            "publishConfig": { "registry": "https://npm.pkg.github.com" }
+          }
+          EOF
+          cp build/Release/ccemu-net.node pkg/
+      
+      - name: Publish platform package
+        run: npm publish ./pkg
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-main:
+    needs: build-platforms
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://npm.pkg.github.com'
+      
+      - run: npm ci
+      
+      - name: Update optionalDependencies
+        run: node scripts/update-optional-deps.js ${{ github.ref_name }}
+      
+      - name: Publish main package
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

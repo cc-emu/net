@@ -1,0 +1,53 @@
+{
+  "name": "@cc-emu/net",
+  "version": "1.0.0",
+  "description": "N-API wrapper for RakNet 3.732",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    }
+  },
+  "files": [
+    "lib",
+    "binding.gyp",
+    "CMakeLists.txt",
+    "src",
+    "vendor"
+  ],
+  "scripts": {
+    "build": "cmake-js compile",
+    "rebuild": "cmake-js rebuild",
+    "test": "node tests/test.js"
+  },
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "cmake-js": "^8.0.0",
+    "detect-libc": "^2.1.2",
+    "node-addon-api": "^8.8.0"
+  },
+  "optionalDependencies": {
+    "@cc-emu/net-darwin-arm64": "1.0.0",
+    "@cc-emu/net-darwin-x64": "1.0.0",
+    "@cc-emu/net-linux-x64": "1.0.0",
+    "@cc-emu/net-linuxmusl-x64": "1.0.0",
+    "@cc-emu/net-win32-x64": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.12.4",
+    "typescript": "^6.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "keywords": [
+    "raknet",
+    "udp",
+    "networking",
+    "native"
+  ],
+  "license": "MIT"
+}
