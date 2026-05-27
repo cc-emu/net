@@ -47,13 +47,13 @@ jobs:
       
       - name: Install dependencies (Ubuntu/macOS/Windows)
         if: matrix.container == ''
-        run: npm ci --no-optional
+        run: npm ci --omit=optional
       
       - name: Install dependencies (Alpine)
         if: matrix.container != ''
         run: |
           apk add --no-cache cmake make g++ python3
-          npm ci --no-optional
+          npm ci --omit=optional
       
       - name: Build native addon
         run: npm run rebuild
@@ -89,7 +89,7 @@ jobs:
           node-version: '22'
           registry-url: 'https://npm.pkg.github.com'
       
-      - run: npm ci --no-optional
+      - run: npm ci --omit=optional
       
       - name: Update optionalDependencies
         run: node scripts/update-optional-deps.js ${{ github.ref_name }}
