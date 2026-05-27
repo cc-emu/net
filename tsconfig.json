@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2025",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "./lib",
+    "rootDir": "./lib",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node"]
+  },
+  "include": ["lib/**/*"],
+  "exclude": ["node_modules", "tests"]
+}
