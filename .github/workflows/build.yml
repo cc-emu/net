@@ -44,17 +44,20 @@ jobs:
         run: |
           apk add --no-cache nodejs npm git
           ln -sf /usr/bin/python3 /usr/local/bin/python
-      
+
+      - name: Remove optionalDependencies for build
+        run: node scripts/strip-optional-deps.js
+
       - name: Install dependencies (Ubuntu/macOS/Windows)
         if: matrix.container == ''
-        run: npm ci --omit=optional
-      
+        run: npm ci
+
       - name: Install dependencies (Alpine)
         if: matrix.container != ''
         run: |
           apk add --no-cache cmake make g++ python3
-          npm ci --omit=optional
-      
+          npm ci
+
       - name: Build native addon
         run: npm run rebuild
       
@@ -88,9 +91,12 @@ jobs:
         with:
           node-version: '22'
           registry-url: 'https://npm.pkg.github.com'
-      
-      - run: npm ci --omit=optional
-      
+
+      - name: Remove optionalDependencies for install
+        run: node scripts/strip-optional-deps.js
+
+      - run: npm ci
+
       - name: Update optionalDependencies
         run: node scripts/update-optional-deps.js ${{ github.ref_name }}
       
