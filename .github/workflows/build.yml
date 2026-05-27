@@ -30,11 +30,11 @@ jobs:
     container: ${{ matrix.container || '' }}
     
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       
       - name: Setup Node.js
         if: matrix.container == ''
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '22'
           registry-url: 'https://npm.pkg.github.com'
@@ -42,8 +42,8 @@ jobs:
       - name: Setup Node.js (Alpine)
         if: matrix.container != ''
         run: |
-          apk add --no-cache nodejs npm
-          npm config set registry https://npm.pkg.github.com
+          apk add --no-cache nodejs npm git
+          ln -sf /usr/bin/python3 /usr/local/bin/python
       
       - name: Install dependencies (Ubuntu/macOS/Windows)
         if: matrix.container == ''
@@ -82,9 +82,9 @@ jobs:
     needs: build-platforms
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: '22'
           registry-url: 'https://npm.pkg.github.com'

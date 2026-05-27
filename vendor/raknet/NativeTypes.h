@@ -1,7 +1,7 @@
 #ifndef __NATIVE_TYPES_H
 #define __NATIVE_TYPES_H
 
-#if (defined(__GNUC__)  || defined(__GCCXML__) || defined(__SNC__))
+#if (defined(__GNUC__)  || defined(__GCCXML__) || defined(__SNC__) || defined(__clang__))
 #include <stdint.h>
 #endif
 
