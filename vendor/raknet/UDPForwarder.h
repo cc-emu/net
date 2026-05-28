@@ -142,12 +142,10 @@ public:
 
 };
 
-} // End namespace
+bool operator<( const DataStructures::MLKeyRef<UDPForwarder::SrcAndDest> &inputKey, const UDPForwarder::ForwardEntry *cls );
+bool operator>( const DataStructures::MLKeyRef<UDPForwarder::SrcAndDest> &inputKey, const UDPForwarder::ForwardEntry *cls );
+bool operator==( const DataStructures::MLKeyRef<UDPForwarder::SrcAndDest> &inputKey, const UDPForwarder::ForwardEntry *cls );
 
-namespace DataStructures {
-bool operator<( const MLKeyRef<RakNet::UDPForwarder::SrcAndDest> &inputKey, const RakNet::UDPForwarder::ForwardEntry *cls );
-bool operator>( const MLKeyRef<RakNet::UDPForwarder::SrcAndDest> &inputKey, const RakNet::UDPForwarder::ForwardEntry *cls );
-bool operator==( const MLKeyRef<RakNet::UDPForwarder::SrcAndDest> &inputKey, const RakNet::UDPForwarder::ForwardEntry *cls );
-}
+} // End namespace
 
 #endif

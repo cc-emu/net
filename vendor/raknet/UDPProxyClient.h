@@ -160,12 +160,10 @@ protected:
 
 };
 
-} // End namespace
+bool operator<( const DataStructures::MLKeyRef<UDPProxyClient::ServerWithPing> &inputKey, const UDPProxyClient::ServerWithPing &cls );
+bool operator>( const DataStructures::MLKeyRef<UDPProxyClient::ServerWithPing> &inputKey, const UDPProxyClient::ServerWithPing &cls );
+bool operator==( const DataStructures::MLKeyRef<UDPProxyClient::ServerWithPing> &inputKey, const UDPProxyClient::ServerWithPing &cls );
 
-namespace DataStructures {
-bool operator<( const MLKeyRef<RakNet::UDPProxyClient::ServerWithPing> &inputKey, const RakNet::UDPProxyClient::ServerWithPing &cls );
-bool operator>( const MLKeyRef<RakNet::UDPProxyClient::ServerWithPing> &inputKey, const RakNet::UDPProxyClient::ServerWithPing &cls );
-bool operator==( const MLKeyRef<RakNet::UDPProxyClient::ServerWithPing> &inputKey, const RakNet::UDPProxyClient::ServerWithPing &cls );
-}
+} // End namespace
 
 #endif
