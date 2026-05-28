@@ -23,6 +23,7 @@ target_link_libraries(${PROJECT_NAME}
 # Include RakNet sources (static library)
 file(GLOB RAKNET_SOURCES vendor/raknet/*.cpp)
 add_library(raknet STATIC ${RAKNET_SOURCES})
+set_target_properties(raknet PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(${PROJECT_NAME} raknet)
 
 # Compiler flags
