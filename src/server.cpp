@@ -3,6 +3,7 @@
 #include <BitStream.h>
 #include <RakNetTypes.h>
 #include <RakNetworkFactory.h>
+#include <stdexcept>
 
 std::atomic<uint64_t> Server::connectionCounter_{0};
 
