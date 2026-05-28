@@ -73,17 +73,7 @@ jobs:
       
       - name: Create platform package
         run: |
-          mkdir -p pkg
-          cat > pkg/package.json <<EOF
-          {
-            "name": "@cc-emu/net-${{ matrix.platform }}",
-            "version": "${{ github.ref_name }}",
-            "os": ["${{ matrix.platform == 'win32-x64' && 'win32' || matrix.platform == 'darwin-x64' && 'darwin' || matrix.platform == 'darwin-arm64' && 'darwin' || 'linux' }}"],
-            "cpu": ["${{ matrix.platform == 'darwin-arm64' && 'arm64' || 'x64' }}"],
-            "files": ["ccemu-net.node"],
-            "publishConfig": { "registry": "https://npm.pkg.github.com" }
-          }
-          EOF
+          node scripts/create-platform-package.js ${{ matrix.platform }} ${{ github.ref_name }}
           cp build/Release/ccemu-net.node pkg/
       
       - name: Publish platform package
