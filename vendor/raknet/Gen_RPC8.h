@@ -234,6 +234,20 @@ typedef unsigned long long NaturalWord;
 #define AUTO_RPC_PARAMETER_REFERENCE_THRESHOLD 0
 #define AUTO_RPC_ABI AUTO_RPC_ABI_PPC
 
+#elif defined( __aarch64__ ) || defined( __arm64__ ) || defined( _M_ARM64 )
+#define AUTO_RPC_AUTORPC_WORD 64
+
+typedef unsigned long long NaturalWord;
+typedef double         HardwareReal;
+
+#define AUTO_RPC_INT_REG_PARAMS 8
+#define AUTO_RPC_FLOAT_REG_PARAMS 8
+#define AUTO_RPC_INT_SHADOW_OF_FLOATS 0
+#define AUTO_RPC_ALLOC_SEPARATE_FLOATS 1
+#define AUTO_RPC_CREATE_FLOAT_MAP 0
+#define AUTO_RPC_PARAMETER_REFERENCE_THRESHOLD 0
+#define AUTO_RPC_ABI AUTO_RPC_ABI_SYSV_AMD64
+
 
 #else
 #ifdef __GNUC__
