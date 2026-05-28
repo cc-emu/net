@@ -21,7 +21,10 @@
   "scripts": {
     "build": "cmake-js compile",
     "rebuild": "cmake-js rebuild",
-    "test": "node tests/test.js"
+    "test": "node tests/test.js",
+    "format": "biome format --write",
+    "lint": "biome lint",
+    "check": "biome check"
   },
   "dependencies": {
     "bindings": "^1.5.0",
@@ -37,6 +40,7 @@
     "@cc-emu/net-win32-x64": "1.0.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.16",
     "@types/node": "^24.12.4",
     "typescript": "^6.0.0"
   },
