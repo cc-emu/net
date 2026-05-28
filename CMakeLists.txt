@@ -29,6 +29,8 @@ target_link_libraries(${PROJECT_NAME} raknet)
 if(MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
     target_link_libraries(${PROJECT_NAME} ws2_32.lib)
+else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
 endif()
 
 # Rename output to .node

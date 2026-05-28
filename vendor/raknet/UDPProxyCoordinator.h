@@ -96,11 +96,13 @@ namespace RakNet
 
 } // End namespace
 
-bool operator<( const DataStructures::MLKeyRef<unsigned short> &inputKey, const RakNet::UDPProxyCoordinator::ServerWithPing &cls );
-bool operator>( const DataStructures::MLKeyRef<unsigned short> &inputKey, const RakNet::UDPProxyCoordinator::ServerWithPing &cls );
-bool operator==( const DataStructures::MLKeyRef<unsigned short> &inputKey, const RakNet::UDPProxyCoordinator::ServerWithPing &cls );
-bool operator<( const DataStructures::MLKeyRef<RakNet::UDPProxyCoordinator::SenderAndTargetAddress> &inputKey, const RakNet::UDPProxyCoordinator::ForwardingRequest *cls );
-bool operator>( const DataStructures::MLKeyRef<RakNet::UDPProxyCoordinator::SenderAndTargetAddress> &inputKey, const RakNet::UDPProxyCoordinator::ForwardingRequest *cls );
-bool operator==( const DataStructures::MLKeyRef<RakNet::UDPProxyCoordinator::SenderAndTargetAddress> &inputKey, const RakNet::UDPProxyCoordinator::ForwardingRequest *cls );
+namespace DataStructures {
+bool operator<( const MLKeyRef<unsigned short> &inputKey, const RakNet::UDPProxyCoordinator::ServerWithPing &cls );
+bool operator>( const MLKeyRef<unsigned short> &inputKey, const RakNet::UDPProxyCoordinator::ServerWithPing &cls );
+bool operator==( const MLKeyRef<unsigned short> &inputKey, const RakNet::UDPProxyCoordinator::ServerWithPing &cls );
+bool operator<( const MLKeyRef<RakNet::UDPProxyCoordinator::SenderAndTargetAddress> &inputKey, const RakNet::UDPProxyCoordinator::ForwardingRequest *cls );
+bool operator>( const MLKeyRef<RakNet::UDPProxyCoordinator::SenderAndTargetAddress> &inputKey, const RakNet::UDPProxyCoordinator::ForwardingRequest *cls );
+bool operator==( const MLKeyRef<RakNet::UDPProxyCoordinator::SenderAndTargetAddress> &inputKey, const RakNet::UDPProxyCoordinator::ForwardingRequest *cls );
+}
 
 #endif

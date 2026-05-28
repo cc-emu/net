@@ -162,8 +162,10 @@ protected:
 
 } // End namespace
 
-bool operator<( const DataStructures::MLKeyRef<RakNet::UDPProxyClient::ServerWithPing> &inputKey, const RakNet::UDPProxyClient::ServerWithPing &cls );
-bool operator>( const DataStructures::MLKeyRef<RakNet::UDPProxyClient::ServerWithPing> &inputKey, const RakNet::UDPProxyClient::ServerWithPing &cls );
-bool operator==( const DataStructures::MLKeyRef<RakNet::UDPProxyClient::ServerWithPing> &inputKey, const RakNet::UDPProxyClient::ServerWithPing &cls );
+namespace DataStructures {
+bool operator<( const MLKeyRef<RakNet::UDPProxyClient::ServerWithPing> &inputKey, const RakNet::UDPProxyClient::ServerWithPing &cls );
+bool operator>( const MLKeyRef<RakNet::UDPProxyClient::ServerWithPing> &inputKey, const RakNet::UDPProxyClient::ServerWithPing &cls );
+bool operator==( const MLKeyRef<RakNet::UDPProxyClient::ServerWithPing> &inputKey, const RakNet::UDPProxyClient::ServerWithPing &cls );
+}
 
 #endif

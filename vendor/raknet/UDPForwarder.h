@@ -144,8 +144,10 @@ public:
 
 } // End namespace
 
-bool operator<( const DataStructures::MLKeyRef<RakNet::UDPForwarder::SrcAndDest> &inputKey, const RakNet::UDPForwarder::ForwardEntry *cls );
-bool operator>( const DataStructures::MLKeyRef<RakNet::UDPForwarder::SrcAndDest> &inputKey, const RakNet::UDPForwarder::ForwardEntry *cls );
-bool operator==( const DataStructures::MLKeyRef<RakNet::UDPForwarder::SrcAndDest> &inputKey, const RakNet::UDPForwarder::ForwardEntry *cls );
+namespace DataStructures {
+bool operator<( const MLKeyRef<RakNet::UDPForwarder::SrcAndDest> &inputKey, const RakNet::UDPForwarder::ForwardEntry *cls );
+bool operator>( const MLKeyRef<RakNet::UDPForwarder::SrcAndDest> &inputKey, const RakNet::UDPForwarder::ForwardEntry *cls );
+bool operator==( const MLKeyRef<RakNet::UDPForwarder::SrcAndDest> &inputKey, const RakNet::UDPForwarder::ForwardEntry *cls );
+}
 
 #endif
