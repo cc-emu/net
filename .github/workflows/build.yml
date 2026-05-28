@@ -100,9 +100,12 @@ jobs:
 
       - run: npm ci
 
+      - name: Set package.json version
+        run: node scripts/set-version.js ${{ github.ref_name }}
+
       - name: Update optionalDependencies
         run: node scripts/update-optional-deps.js ${{ github.ref_name }}
-      
+
       - name: Publish main package
         run: npm publish
         env:

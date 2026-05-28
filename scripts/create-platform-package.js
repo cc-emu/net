@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const platform = process.argv[2];
-const version = process.argv[3];
+const version = (process.argv[3] || '').replace(/^v/, '');
 
 const os = platform === 'win32-x64' ? 'win32'
   : platform.startsWith('darwin') ? 'darwin'
