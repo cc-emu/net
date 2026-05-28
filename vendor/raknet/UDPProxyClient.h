@@ -160,6 +160,10 @@ protected:
 
 };
 
+bool operator<( const DataStructures::MLKeyRef<UDPProxyClient::ServerWithPing> &inputKey, const UDPProxyClient::ServerWithPing &cls );
+bool operator>( const DataStructures::MLKeyRef<UDPProxyClient::ServerWithPing> &inputKey, const UDPProxyClient::ServerWithPing &cls );
+bool operator==( const DataStructures::MLKeyRef<UDPProxyClient::ServerWithPing> &inputKey, const UDPProxyClient::ServerWithPing &cls );
+
 } // End namespace
 
 #endif

@@ -1,6 +1,6 @@
 {
   "name": "@cc-emu/net",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "N-API wrapper for RakNet 3.732",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

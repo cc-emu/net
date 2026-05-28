@@ -8,9 +8,11 @@
 using namespace RakNet;
 static const int DEFAULT_UNRESPONSIVE_PING_TIME=1000;
 
+namespace RakNet {
 bool operator<( const DataStructures::MLKeyRef<UDPProxyClient::ServerWithPing> &inputKey, const UDPProxyClient::ServerWithPing &cls ) {return inputKey.Get().serverAddress < cls.serverAddress;}
 bool operator>( const DataStructures::MLKeyRef<UDPProxyClient::ServerWithPing> &inputKey, const UDPProxyClient::ServerWithPing &cls ) {return inputKey.Get().serverAddress > cls.serverAddress;}
 bool operator==( const DataStructures::MLKeyRef<UDPProxyClient::ServerWithPing> &inputKey, const UDPProxyClient::ServerWithPing &cls ) {return inputKey.Get().serverAddress == cls.serverAddress;}
+}
 
 
 UDPProxyClient::UDPProxyClient()

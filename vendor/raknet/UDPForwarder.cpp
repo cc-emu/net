@@ -10,6 +10,7 @@ static const unsigned short DEFAULT_MAX_FORWARD_ENTRIES=64;
 
 RAK_THREAD_DECLARATION(UpdateUDPForwarder);
 
+namespace RakNet {
 bool operator<( const DataStructures::MLKeyRef<UDPForwarder::SrcAndDest> &inputKey, const UDPForwarder::ForwardEntry *cls )
 {
 	return inputKey.Get().source < cls->srcAndDest.source ||
@@ -23,6 +24,7 @@ bool operator>( const DataStructures::MLKeyRef<UDPForwarder::SrcAndDest> &inputK
 bool operator==( const DataStructures::MLKeyRef<UDPForwarder::SrcAndDest> &inputKey, const UDPForwarder::ForwardEntry *cls )
 {
 	return inputKey.Get().source == cls->srcAndDest.source && inputKey.Get().destination == cls->srcAndDest.destination;
+}
 }
 
 

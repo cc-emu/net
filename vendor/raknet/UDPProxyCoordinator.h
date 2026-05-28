@@ -94,6 +94,13 @@ namespace RakNet
 
 	};
 
+bool operator<( const DataStructures::MLKeyRef<unsigned short> &inputKey, const UDPProxyCoordinator::ServerWithPing &cls );
+bool operator>( const DataStructures::MLKeyRef<unsigned short> &inputKey, const UDPProxyCoordinator::ServerWithPing &cls );
+bool operator==( const DataStructures::MLKeyRef<unsigned short> &inputKey, const UDPProxyCoordinator::ServerWithPing &cls );
+bool operator<( const DataStructures::MLKeyRef<UDPProxyCoordinator::SenderAndTargetAddress> &inputKey, const UDPProxyCoordinator::ForwardingRequest *cls );
+bool operator>( const DataStructures::MLKeyRef<UDPProxyCoordinator::SenderAndTargetAddress> &inputKey, const UDPProxyCoordinator::ForwardingRequest *cls );
+bool operator==( const DataStructures::MLKeyRef<UDPProxyCoordinator::SenderAndTargetAddress> &inputKey, const UDPProxyCoordinator::ForwardingRequest *cls );
+
 } // End namespace
 
 #endif

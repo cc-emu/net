@@ -1,10 +1,9 @@
 #ifndef __NATIVE_TYPES_H
 #define __NATIVE_TYPES_H
 
-#if (defined(__GNUC__)  || defined(__GCCXML__) || defined(__SNC__) || defined(__clang__))
+#if (defined(__GNUC__)  || defined(__GCCXML__) || defined(__SNC__) || defined(__clang__) || defined(__APPLE__))
 #include <stdint.h>
-#endif
-
+#else
 #if !defined(_STDINT_H) && !defined(_SN_STDINT_H) && !defined(_SYS_STDINT_H_) && !defined(_STDINT) && !defined(_MACHTYPES_H_)
 	typedef unsigned char       uint8_t;
 	typedef unsigned short      uint16_t;
@@ -19,6 +18,7 @@
 		typedef unsigned long long int    uint64_t;
 		typedef signed long long   	int64_t;
 	#endif
+#endif
 #endif
 
 

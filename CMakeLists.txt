@@ -23,12 +23,15 @@ target_link_libraries(${PROJECT_NAME}
 # Include RakNet sources (static library)
 file(GLOB RAKNET_SOURCES vendor/raknet/*.cpp)
 add_library(raknet STATIC ${RAKNET_SOURCES})
+set_target_properties(raknet PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(${PROJECT_NAME} raknet)
 
-# Windows-specific
+# Compiler flags
 if(MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
     target_link_libraries(${PROJECT_NAME} ws2_32.lib)
+else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
 endif()
 
 # Rename output to .node
