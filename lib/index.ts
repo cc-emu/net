@@ -9,17 +9,16 @@ function getRuntimePlatform(): string {
       if (isNonGlibcLinuxSync()) {
         return platform.replace("linux", "linuxmusl");
       }
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
   }
   return platform;
 }
 
 // Load native addon
 const runtimePlatform = getRuntimePlatform();
-const paths = [
-  `../build/Release/ccemu-net.node`,
-  `@cc-emu/net-${runtimePlatform}/ccemu-net.node`,
-];
+const paths = [`../build/Release/ccemu-net.node`, `@cc-emu/net-${runtimePlatform}/ccemu-net.node`];
 
 let binding: any;
 const errors: Error[] = [];
@@ -35,15 +34,11 @@ for (const p of paths) {
 }
 
 if (!binding) {
-  const supported = [
-    "darwin-x64", "darwin-arm64",
-    "linux-x64", "linuxmusl-x64",
-    "win32-x64",
-  ];
+  const supported = ["darwin-x64", "darwin-arm64", "linux-x64", "linuxmusl-x64", "win32-x64"];
   throw new Error(
     `@cc-emu/net: No prebuilt binary found for ${runtimePlatform}.\n` +
-    `Supported platforms: ${supported.join(", ")}.\n` +
-    `Errors:\n${errors.map(e => `  - ${e.message}`).join("\n")}`
+      `Supported platforms: ${supported.join(", ")}.\n` +
+      `Errors:\n${errors.map((e) => `  - ${e.message}`).join("\n")}`,
   );
 }
 
@@ -137,16 +132,13 @@ export class Server extends EventEmitter {
       this.emit("connect", client);
     });
 
-    this.native_.on(
-      "disconnect",
-      (nativeClient: any, reason: DisconnectReason) => {
-        const client = this.findClient(nativeClient);
-        if (client) {
-          this.connections_.delete(client);
-          this.emit("disconnect", client, reason);
-        }
-      },
-    );
+    this.native_.on("disconnect", (nativeClient: any, reason: DisconnectReason) => {
+      const client = this.findClient(nativeClient);
+      if (client) {
+        this.connections_.delete(client);
+        this.emit("disconnect", client, reason);
+      }
+    });
 
     this.native_.on("message", (event: MessageEvent) => {
       this.emit("message", event);
@@ -171,10 +163,7 @@ export class Server extends EventEmitter {
   }
 
   on(event: "connect", handler: (client: Connection) => void): this;
-  on(
-    event: "disconnect",
-    handler: (client: Connection, reason: DisconnectReason) => void,
-  ): this;
+  on(event: "disconnect", handler: (client: Connection, reason: DisconnectReason) => void): this;
   on(event: "message", handler: (event: MessageEvent) => void): this;
   on(event: "error", handler: (error: Error) => void): this;
   on(event: string, handler: (...args: any[]) => void): this {
