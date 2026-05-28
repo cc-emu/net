@@ -45,8 +45,15 @@ jobs:
       - name: Setup Node.js (Alpine)
         if: matrix.container != ''
         run: |
-          apk add --no-cache nodejs npm git
+          apk add --no-cache nodejs npm git curl tar python3
           ln -sf /usr/bin/python3 /usr/local/bin/python
+      
+      - name: Setup Node.js registry (Alpine)
+        if: matrix.container != ''
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          registry-url: 'https://npm.pkg.github.com'
 
       - name: Remove optionalDependencies for build
         run: node scripts/strip-optional-deps.js
@@ -58,7 +65,7 @@ jobs:
       - name: Install dependencies (Alpine)
         if: matrix.container != ''
         run: |
-          apk add --no-cache cmake make g++ python3
+          apk add --no-cache cmake make g++
           npm ci
 
       - name: Build native addon
