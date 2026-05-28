@@ -7,6 +7,9 @@ on:
 
 jobs:
   build-platforms:
+    permissions:
+      contents: read
+      packages: write
     strategy:
       matrix:
         include:
@@ -82,6 +85,9 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish-main:
+    permissions:
+      contents: read
+      packages: write
     needs: build-platforms
     runs-on: ubuntu-latest
     steps:
